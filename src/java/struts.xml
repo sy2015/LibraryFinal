@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="module-user" namespace="/vues" extends="struts-default">
+        <interceptors>
+            <interceptor name="sessionInterceptor" class="presentation.SessionInterceptor"/>
+        </interceptors>
+        
+        <global-results>
+            <result name="fail">/vues/login.jsp</result>
+        </global-results>
+        
+        <action name="authentication" 
+                class="presentation.AuthAction" method="connectUser">
+                <result name="success" type="redirect">/vues/index.jsp</result>
+                <result name="error" type="redirect">/vues/login.jsp</result>
+                <result name="input">/vues/login/index.jsp</result>
+        </action>
+        
+        <action name="redirectBooks" 
+                class="presentation.BooksAction" method="redirectBooks">
+                <result name="success" type="redirect">/vues/booksList.jsp</result>
+        </action>
+        
+        <action name="bookDetails" 
+                class="presentation.BooksAction" method="bookDetails">
+                <result name="success">/vues/bookDetails.jsp</result>
+        </action>
+        
+         <action name="deleteBook" 
+                class="presentation.BooksAction" method="deleteBook">
+                <result type="stream">
+                    <param name="contentType">text/html</param>
+                    <param name="inputName">stream</param>
+                </result>
+        </action>
+        
+        <action name="updateBook" 
+                class="presentation.BooksAction" method="updateBook">
+                <result name="success" type="redirect">/vues/booksList.jsp</result>
+        </action>
+        
+        <action name="bookAllocation" 
+                class="presentation.BooksAction" method="bookAllocation">
+                <result name="success" type="redirect">/vues/borrowsList.jsp</result>
+        </action>
+        
+        <action name="getData" 
+                class="presentation.GetDataAction" method="getData">
+                <result type="stream">
+                    <param name="contentType">text/html</param>
+                    <param name="inputName">stream</param>
+                </result>
+        </action>
+    </package>
+</struts>
